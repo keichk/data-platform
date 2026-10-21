@@ -12,7 +12,7 @@ Le pipeline doit être exécuté chaque nuit afin de rendre les dashboards et la
 
 Les données de paiement peuvent changer a posteriori. Une simple stratégie consistant à ajouter uniquement les nouvelles lignes ne suffit donc pas. Le pipeline doit pouvoir réimporter une fenêtre historique et remplacer les versions précédentes des lignes concernées.
 
-Airflow utilise une date logique qui représente le début de l’intervalle de données traité, et non nécessairement l’heure réelle de démarrage du traitement. Cette distinction est importante pour rejouer un traitement avec la même période métier. [web:688][web:689]
+Airflow utilise une date logique qui représente le début de l’intervalle de données traité, et non nécessairement l’heure réelle de démarrage du traitement. Cette distinction est importante pour rejouer un traitement avec la même période métier.
 
 ## Décision
 
@@ -131,7 +131,7 @@ WHEN NOT MATCHED THEN
   );
 ```
 
-L’opération `MERGE` met à jour les lignes existantes et insère les nouvelles lignes selon la clé de correspondance. Cette logique permet d’éviter les doublons lors d’un rerun et de prendre en compte les corrections tardives de l’API de paiement. [web:687]
+L’opération `MERGE` met à jour les lignes existantes et insère les nouvelles lignes selon la clé de correspondance. Cette logique permet d’éviter les doublons lors d’un rerun et de prendre en compte les corrections tardives de l’API de paiement. 
 
 ### dbt incrémental
 
@@ -171,7 +171,7 @@ where updated_at >= timestamp_sub(
 
 La fenêtre de trois jours permet de récupérer les corrections tardives sans retraiter systématiquement les trois années complètes. Elle doit être ajustée si le prestataire garantit une fenêtre de correction plus longue.
 
-dbt utilise une clé unique avec la stratégie `merge` pour mettre à jour les lignes correspondantes et insérer les nouvelles lignes. Les modèles incrémentaux ne retraitent donc que les données filtrées par la logique du modèle. [web:668][web:669]
+dbt utilise une clé unique avec la stratégie `merge` pour mettre à jour les lignes correspondantes et insérer les nouvelles lignes. Les modèles incrémentaux ne retraitent donc que les données filtrées par la logique du modèle.
 
 ## Stratégie de backfill
 
