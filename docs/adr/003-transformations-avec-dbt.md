@@ -105,7 +105,7 @@ Les tests dbt sont utilisés pour empêcher la publication de données invalides
 - qu’un montant est cohérent ;
 - qu’une date se trouve dans une plage attendue.
 
-Un test dbt est considéré comme réussi lorsqu’il ne retourne aucune ligne en erreur. [web:664]
+Un test dbt est considéré comme réussi lorsqu’il ne retourne aucune ligne en erreur.
 
 Exemple :
 
@@ -184,7 +184,7 @@ where updated_at >= timestamp_sub(
 {% endif %}
 ```
 
-La colonne `unique_key` permet à dbt d’identifier les lignes existantes et de les mettre à jour au lieu de les ajouter systématiquement. Cette clé doit être réellement unique et ne doit pas contenir de valeurs nulles, faute de quoi le modèle peut produire des doublons. [web:699][web:669]
+La colonne `unique_key` permet à dbt d’identifier les lignes existantes et de les mettre à jour au lieu de les ajouter systématiquement. Cette clé doit être réellement unique et ne doit pas contenir de valeurs nulles, faute de quoi le modèle peut produire des doublons.
 
 La fenêtre de trois jours permet de récupérer les corrections tardives des sources sans retraiter toute la table. Cette valeur sera ajustée si l’analyse du prestataire de paiement montre que les corrections peuvent intervenir plus tard.
 
@@ -214,7 +214,7 @@ models:
         description: "Nombre de commandes retenues."
 ```
 
-La documentation dbt permet de consulter les modèles, les descriptions, les tests et le graphe de lineage du projet. [web:664][web:702]
+La documentation dbt permet de consulter les modèles, les descriptions, les tests et le graphe de lineage du projet. 
 
 ## Orchestration avec Airflow
 
@@ -265,7 +265,7 @@ dbt docs generate
 dbt docs serve
 ```
 
-La commande `dbt build` permet de construire les ressources du projet et d’exécuter les tests dans l’ordre des dépendances. Elle peut notamment exécuter les seeds, snapshots, modèles, tests unitaires et tests de données selon les ressources sélectionnées. [web:700][web:701]
+La commande `dbt build` permet de construire les ressources du projet et d’exécuter les tests dans l’ordre des dépendances. Elle peut notamment exécuter les seeds, snapshots, modèles, tests unitaires et tests de données selon les ressources sélectionnées.
 
 La commande principale de la pipeline sera :
 
@@ -296,9 +296,9 @@ dbt build --select +churn_features_daily
 
 Les transformations sont centralisées, versionnées et organisées par dépendances. Les modèles dbt peuvent être relus, testés et exécutés localement avant leur intégration dans la pipeline.
 
-Les tests dbt réduisent le risque de publier des données incorrectes dans les dashboards ou dans la table de features churn. La documentation et le lineage facilitent également l’analyse de l’impact lorsqu’une source ou une colonne change. [web:664][web:671]
+Les tests dbt réduisent le risque de publier des données incorrectes dans les dashboards ou dans la table de features churn. La documentation et le lineage facilitent également l’analyse de l’impact lorsqu’une source ou une colonne change.
 
-Les modèles incrémentaux réduisent le volume retraité quotidiennement et améliorent le temps d’exécution de la pipeline. En revanche, ils exigent des clés métier fiables, des filtres incrémentaux corrects et une stratégie explicite pour les corrections tardives. [web:669][web:699]
+Les modèles incrémentaux réduisent le volume retraité quotidiennement et améliorent le temps d’exécution de la pipeline. En revanche, ils exigent des clés métier fiables, des filtres incrémentaux corrects et une stratégie explicite pour les corrections tardives.
 
 L’équipe doit apprendre la structure d’un projet dbt, Jinja, les modèles incrémentaux, les tests et les conventions de nommage.
 
